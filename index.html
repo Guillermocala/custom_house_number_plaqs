@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Características Específicas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        input[type="number"] {
+            margin-bottom: 10px;
+        }
+
+        select {
+            margin-bottom: 10px;
+        }
+
+        #contenedor-imagen {
+            margin-top: 50px;
+            width: 500px;
+            height: 100px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .extremo {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+
+        #imagen-overlay {
+            font-size: 10vw;
+            width: 300px;
+            height: 100px;
+            text-align: center;
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom house number plaques</h1>
+    <div id="container">
+        <label for="numero">Ingresa un número (entre 1 y 9999):</label>
+        <input type="number" id="numero" min="1" max="9999">
+    
+        <label for="color">Selecciona un color:</label>
+        <input type="color" id="color">
+        
+        <label for="imagen">Selecciona una imagen:</label>
+        <select id="imagen">
+            <option value="imagen1.jpg">Imagen 1</option>
+            <option value="imagen2.jpg">Imagen 2</option>
+            <option value="imagen3.jpg">Imagen 3</option>
+            <option value="imagen4.jpg">Imagen 4</option>
+            <option value="imagen5.jpg">Imagen 5</option>
+        </select>
+
+        <div id="contenedor-imagen">
+            <div class="extremo"></div>
+            <div id="imagen-overlay"></div>
+            <div class="extremo"></div>
+        </div>
+    </div>
+
+    <script>
+        const numeroInput = document.getElementById("numero");
+        const colorInput = document.getElementById("color");
+        const imagenSelect = document.getElementById("imagen");
+        const numeroOverlay = document.getElementById("imagen-overlay");
+
+        numeroInput.addEventListener("input", actualizarNumero);
+        colorInput.addEventListener("input", actualizarColor);
+        imagenSelect.addEventListener("change", actualizarImagen);
+
+        function actualizarNumero() {
+            const numero = numeroInput.value;
+            if (numero > 0 && numero < 10000) {
+                numeroOverlay.textContent = numero;                
+            }
+            else { numeroOverlay.textContent = ""; }
+        }
+
+        function actualizarColor() {
+            const color = colorInput.value;
+            numeroOverlay.style.color = color; // Aplicar color al texto del número
+        }
+
+        function actualizarImagen() {
+            const imagen = imagenSelect.value;
+            numeroOverlay.style.backgroundImage = `url(${imagen})`;
+        }
+    </script>
+</body>
+</html>
